@@ -13,7 +13,17 @@ import { createStore } from 'redux';
 import {Provider} from 'react-redux';
 
 const initialState = {
-  counter : 0
+  counter : 0,
+  calorie_count : 1600,
+  saturated_fats: 0.9,
+  unsaturated_fats: 0.3,
+  protein: 0.5,
+  fiber: 0.7,
+  iron: 0.5,
+  vitamin_a: 0.4,
+  vitamin_b: 0.2,
+  vitamin_c: 0.9,
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,7 +48,7 @@ export default function App(props) {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           <NavigationContainer linking={LinkingConfiguration}>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
               <Stack.Screen name="Root" component={BottomTabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>

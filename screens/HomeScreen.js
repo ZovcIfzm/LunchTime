@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { Header, Card, CardItem, ListItem} from 'react-native-elements'
 import { MonoText } from '../components/StyledText';
 
 import {connect} from 'react-redux';
@@ -11,36 +12,31 @@ class HomeScreen extends React.Component{
   render(){
     return (
       <View style={styles.container}>
+        <Header 
+            backgroundColor='#fff'
+            leftComponent={{icon: 'menu', color: 'black'}}
+            centerComponent={{ text: 'Home', style: styles.headerText}}
+            //rightComponent={{ text: 'Right component', style: styles.headerText }}
+            containerStyle={{
+              elevation: 10,
+              shadowOffset:{  width: 10,  height: 10,  },
+              shadowColor: 'black',
+              shadowOpacity: 1.0,
+            }}
+            >
+        </Header>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
-
-          <View style={styles.getStartedContainer}>
-            <DevelopmentModeNotice />
-
-            <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change any of the text, save the file, and your app will automatically reload.
-            </Text>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein}</Text>
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.calorie_count}</Text>
           </View>
 
           <TouchableOpacity onPress={() => this.props.increaseCounter()}>
@@ -70,43 +66,19 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use useful development
-        tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
-}
-
 
 function mapStateToProps(state){
   return{
-    counter:state.counter
+    counter:state.counter,
+    calorie_count:state.calorie_count,
+    saturated_fats:state.saturated_fats,
+    unsaturated_fats:state.unsaturated_fats,
+    protein:state.protein,
+    fiber:state.fiber,
+    iron:state.iron,
+    vitamin_a:state.vitamin_a,
+    vitamin_b:state.vitamin_b,
+    vitamin_c:state.vitamin_c,
   }
 }
 
@@ -117,10 +89,12 @@ function mapDispatchToProps(dispatch){
   }
 }
 
+//Color scheme: -- not this one -- https://coolors.co/ef6351-f38375-f7a399-fbc3bc-ffe3e0
+//https://coolors.co/6d949b-fff7b5-eabc5a-bf6763-8e5756
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'whitesmoke',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -204,6 +178,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  headerText: {
+    fontSize: 25,
+    fontFamily: 'Roboto',
+    color: 'black'
+  },
+  infoCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 17,
+    marginBottom: 10,
+    padding: 15,
+    borderRadius: 10,
+    elevation: 5,
+    shadowOffset:{  width: 10,  height: 10,  },
+    shadowColor: 'black',
+    shadowOpacity: 1.0,
+  },
+  infoCardText: {
+    fontSize: 18,
+  }
 });
 
 
