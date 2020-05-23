@@ -26,6 +26,14 @@ class HomeScreen extends React.Component{
             >
         </Header>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.imageContainer}>
+            <Image 
+              source={
+                  require('../assets/images/spaghettiandmeatballs.jpg')
+              }
+              style={styles.foodRecommendation}
+            />
+          </View>
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
@@ -196,6 +204,18 @@ const styles = StyleSheet.create({
   },
   infoCardText: {
     fontSize: 18,
+  },
+  imageContainer: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 20,
+    marginHorizontal: 60,
+    marginBottom: 20,
+  },
+  foodRecommendation: {
+    alignSelf: 'center',
+    width: 250,
+    borderRadius: 20,
   }
 });
 

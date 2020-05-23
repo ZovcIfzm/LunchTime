@@ -44,7 +44,7 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 const styles = StyleSheet.create({
   tabBar:{
-    backgroundColor: '#E07A5F'
+    backgroundColor: '#fff'
   },
   tabBarLabel:{
     fontSize: 20,
