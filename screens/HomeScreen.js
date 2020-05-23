@@ -188,7 +188,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 25,
-    fontFamily: 'Roboto',
     color: 'black'
   },
   infoCard: {
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOffset:{  width: 10,  height: 10,  },
     shadowColor: 'black',
-    shadowOpacity: 1.0,
+    shadowOpacity: 0.1,
   },
   infoCardText: {
     fontSize: 18,
