@@ -18,6 +18,7 @@ class CaptureScreen extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button title="Pick an image from camera roll" onPress={this._pickImage} />
+        <Button title="Take photo" onPress={this._takePhoto}/>
         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       </View>
     );
@@ -32,6 +33,11 @@ class CaptureScreen extends React.Component {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
+      }
+      
+      const { status2 } = await Permissions.askAsync(Permissions.CAMERA);
+      if (status2 !== 'granted') {
+        alert('Sorry, we need camera permissions to make this work!');
       }
     }
   };
@@ -53,7 +59,26 @@ class CaptureScreen extends React.Component {
       console.log(E);
     }
   };
+
+  _takePhoto = async () => {
+    try {
+      let result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
+      }
+
+      console.log(result);
+    } catch (E) {
+      console.log(E);
+    }
+  };
 }
+
 
 function mapStateToProps(state){
   return{
