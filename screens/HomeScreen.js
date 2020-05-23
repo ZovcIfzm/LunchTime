@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     backgroundColor: '#fff',
-    padding: 10,
+    padding: 5,
     borderRadius: 20,
-    marginHorizontal: 60,
+    marginHorizontal: 63,
     marginBottom: 20,
   },
   foodRecommendation: {
