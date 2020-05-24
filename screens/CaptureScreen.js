@@ -7,6 +7,7 @@ import * as Permissions from 'expo-permissions';
 
 import {connect} from 'react-redux';
 
+
 class CaptureScreen extends React.Component {
   state = {
     image: null,
@@ -19,7 +20,7 @@ class CaptureScreen extends React.Component {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button title="Pick an image from camera roll" onPress={this._pickImage} />
         <Button title="Take photo" onPress={this._takePhoto}/>
-        {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
+        {image && <Image source={{ uri: `data:${"image"};base64,${image}` }} style={{ width: 200, height: 200 }} />}
         {
           image ? <Button title="Submit photo" onPress={this._submitPhoto}/> :<></>          
         } 

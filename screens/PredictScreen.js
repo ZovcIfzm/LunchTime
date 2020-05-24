@@ -81,7 +81,7 @@ class PredictScreen extends React.Component {
     return (
       <View>
         <Text>This is the predictScreen</Text>
-        {this.state.picture && <Image source={{ uri: this.state.picture.uri }} style={{ width: 200, height: 200 }} />}
+        {this.state.picture && <Image source={{ uri: `data:${"image"};base64,${this.state.picture}` }} style={{ width: 200, height: 200 }} />}
       </View>
     )
   }
