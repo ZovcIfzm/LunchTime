@@ -8,6 +8,7 @@ import LinksScreen from '../screens/LinksScreen';
 import CaptureScreen from '../screens/CaptureScreen';
 import PredictScreen from '../screens/PredictScreen';
 import RecipeScreen from '../screens/RecipeScreen';
+import RecommendScreen from '../screens/RecommendScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -54,6 +55,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={PredictScreen}
         options={{
           title: 'Predict',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Recommends"
+        component={RecommendScreen}
+        options={{
+          title: 'Recommends',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />

@@ -14,8 +14,7 @@ class RecipeScreen extends React.Component{
       <View style={styles.container}>
         <Header 
             backgroundColor='#fff'
-            leftComponent={{icon: 'menu', color: 'black'}}
-            centerComponent={{ text: 'Recipes', style: styles.headerText}}
+            centerComponent={{ text: 'Honey Chicken', style: styles.headerText}}
             //rightComponent={{ text: 'Right component', style: styles.headerText }}
             containerStyle={{
               elevation: 10,
@@ -26,14 +25,16 @@ class RecipeScreen extends React.Component{
             >
         </Header>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Swedish Meatballs"}</Text>
+        <View style={styles.imageContainer}>
             <Image 
               source={
-                  require('../assets/images/spaghettiandmeatballs.jpg')
+                  require('../assets/images/honeyChicken.png')
               }
-              style={styles.foodThumbnail}
+              style={styles.foodRecommendation}
             />
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Protein: " + this.props.protein}</Text>
@@ -44,25 +45,7 @@ class RecipeScreen extends React.Component{
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.calorie_count}</Text>
           </View>
-
-          <TouchableOpacity onPress={() => this.props.increaseCounter()}>
-            <Text style={styles.getStartedText}>
-              CountUp
-            </Text>
-          </TouchableOpacity>
-          
-          <Text style={styles.getStartedText}>{this.props.counter}</Text>
-
-
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-          </View>
-        </View>
       </View>
     );
   }
@@ -203,21 +186,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   imageContainer: {
-    backgroundColor: '#fff',
-    padding: 5,
-    borderRadius: 20,
-    marginHorizontal: 63,
-    marginBottom: 20,
+    height: 400, 
+    margin: 0,
+    elevation: 5,
+    shadowOffset:{  width: 10,  height: 10,  },
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
   },
   foodRecommendation: {
-    alignSelf: 'center',
-    width: 250,
-    borderRadius: 20,
+    flex: 1, height: null, width: null, borderRadius: 10
   },
-  foodThumbnail: {
-    transform: [{ scale: 0.5 }],
+  title: {
     alignSelf: 'center',
-    borderRadius: 20,
+    fontSize: 25,
   }
 });
 
