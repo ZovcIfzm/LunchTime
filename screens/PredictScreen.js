@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ActivityIndicator, View, Text, StatusBar, Alert, } from 'react-native'
+import { ActivityIndicator, View, Text, StatusBar, Alert, Button, Image} from 'react-native'
 import {connect} from 'react-redux';
 
 //import { NavigationActions } from 'react-navigation'
@@ -9,7 +9,9 @@ import Clarifai from 'clarifai'
 
   
 class PredictScreen extends React.Component {
-
+  state={
+    picture: null,
+  }
 
   componentDidMount() {
     const clarifai = new Clarifai.App({
@@ -22,10 +24,12 @@ class PredictScreen extends React.Component {
     //setImmediete means run this once the end of this javascript executable block is reached.
     process.nextTick = setImmediate // RN polyfill
 
-    const { data } = this.props
+    const data = this.props.route.params.image
+    this.setState({picture: data})
+    //const otherParam=navigation.getParam('otherParam','some default value');
     const file = { base64: data }
     
-    clarifai.models.predict(Clarifai.GENERAL_MODEL, file)
+    clarifai.models.predict('bd367be194cf45149e75f01d59f77ba7', data)
       .then(response => {
         const { concepts } = response.outputs[0].data
 
@@ -41,11 +45,12 @@ class PredictScreen extends React.Component {
         this.setState({ loading: false })
       })
       .catch(e => {
+        console.log(e)
         Alert.alert(
-          'Une erreur est survenue',
-          'Désolé, le quota est peut-être dépassé, réessaye plus tard !',
+          'An error has occurred',
+            'Sorry, the quota may be exceeded, try again later!',
           [
-            { text: 'OK', onPress: () => this._cancel() },
+            { text: 'OK'},
           ],
           { cancelable: false }
         )
@@ -55,7 +60,10 @@ class PredictScreen extends React.Component {
   render() {
 
     return (
-      <Text>This is the predictScreen</Text>
+      <View>
+        <Text>This is the predictScreen</Text>
+        {this.state.picture && <Image source={{ uri: this.state.picture }} style={{ width: 200, height: 200 }} />}
+      </View>
     )
   }
 }
