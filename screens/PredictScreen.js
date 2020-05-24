@@ -4,7 +4,7 @@ import { ActivityIndicator, View, Text, StatusBar, Alert, } from 'react-native'
 import {connect} from 'react-redux';
 
 //import { NavigationActions } from 'react-navigation'
-//import { CLARIFAY_KEY } from 'react-native-dotenv'
+import { CLARIFAI_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
 
   
@@ -13,7 +13,7 @@ class PredictScreen extends React.Component {
 
   componentDidMount() {
     const clarifai = new Clarifai.App({
-      apiKey: CLARIFAY_KEY
+      apiKey: CLARIFAI_KEY
     })
 
     //Clarifai library uses nextTick method which is not supported in React Native
@@ -22,7 +22,7 @@ class PredictScreen extends React.Component {
     //setImmediete means run this once the end of this javascript executable block is reached.
     process.nextTick = setImmediate // RN polyfill
 
-    const { data } = this.props.navigation.state.params.image
+    const { data } = this.props
     const file = { base64: data }
     
     clarifai.models.predict(Clarifai.GENERAL_MODEL, file)
