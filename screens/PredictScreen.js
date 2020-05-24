@@ -7,11 +7,13 @@ import ImageManipulator from 'expo';
 import { CLARIFAI_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
 import {NavigationEvents} from 'react-navigation'
-  
+import * as fbfunc from '../firebase_functions'  
+
 class PredictScreen extends React.Component {
   state={
     picture: null,
     loading: false,
+    topFiveIngredients: [],
   }
 
   resize = async photo => {
@@ -38,7 +40,7 @@ class PredictScreen extends React.Component {
     this.setState({picture: data})
     //const otherParam=navigation.getParam('otherParam','some default value');
     const file = { base64: data }
-    console.log(file)
+    //console.log(file)
     
     console.log("reached predict")
     
@@ -46,12 +48,18 @@ class PredictScreen extends React.Component {
       .then(response => {
         console.log("into predict")
         const { concepts } = response.outputs[0].data
-
+        this.setState({topFiveIngredients: [concepts[0].name, concepts[1].name, concepts[2].name, concepts[3].name, concepts[4].name]})
+        console.log(concepts[0].name)
+        console.log(concepts[1].name)
+        console.log(concepts[2].name)
+        console.log(fbfunc.testHi())
+        fbfunc.addMeal("<TEST>", "meal", this.state.topFiveIngredients)
+        
         if (concepts && concepts.length > 0) {
           for (const prediction of concepts) {
             if (prediction.name === 'pizza' && prediction.value >= 0.99) {
               console.log("reached inner result")
-              console.log(this.state.result)
+              console.log("Pizza")
               return this.setState({ loading: false, result: 'Pizza' })
             }
             this.setState({ result: 'Not Pizza' })
@@ -99,6 +107,5 @@ return{
   decreaseCounter: () => dispatch({type: 'DECREASE_COUNTER'}),
 }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PredictScreen);

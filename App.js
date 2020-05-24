@@ -7,6 +7,12 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+import {decode, encode} from 'base-64'
+if (!global.btoa) {  global.btoa = encode }
+
+if (!global.atob) { global.atob = decode }
+
+
 const Stack = createStackNavigator();
 
 import { createStore } from 'redux';

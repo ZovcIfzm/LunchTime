@@ -137,6 +137,29 @@ function addMeal (username,mealname,mealingredients) {
         console.log("Error when trying to add a meal: "+error);
     })
 }
+    
+    
+function requestClarifai() {
+    var reader = new FileReader();
+    reader.readAsDataURL('assets/images/ohlonehackslogo.jpg');
+    
+    
+    var req = new XMLHttpRequest();
+//    var req_body = '{"inputs": [{"data": {"image": {"url": "https://samples.clarifai.com/food.jpg"}}}]}';
+    console.log(reader.result);
+        var req_body = '{"inputs": [{"data": {"image": {"base64": '+reader.result+'}}}]}';
+    
+//    var out_str = '{"inputs": [{"data": { "image": { "base64": "'"$(assets/images/ohlonehackslogo.jpg)"'"}}}]}';
+   req.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    console.log(this.responseText);
+  }
+}; req.open("POST","https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs",true);
+        req.setRequestHeader("Authorization","Key f0e07e6a6a0c494795cc442431bcfdcb");
+    req.setRequestHeader("Content-Type","application/json");
+    req.send(req_body);
+
+}
 
 
 var newdata = {
@@ -152,8 +175,8 @@ var newdata = {
 }
 var mealname = "tofu";
 var ing = ["tofu","soy sauce","salt"];
-addMeal("<TEST>",mealname,ing);
 
+    addEntry('<TEST>',newdata);
 
 
     

@@ -1,30 +1,8 @@
-  
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-import * as firebase from "firebase/app";
-
-// If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
-
-// Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
-var firebaseConfig = {
-    apiKey: "AIzaSyAmW_j4-0PNdQ9M8_wgfgruYe66AFeVawg",
-    authDomain: "lunchtime-929c6.firebaseapp.com",
-    databaseURL: "https://lunchtime-929c6.firebaseio.com",
-    projectId: "lunchtime-929c6",
-    storageBucket: "lunchtime-929c6.appspot.com",
-    messagingSenderId: "328669618858",
-    appId: "1:328669618858:web:0d0934796a3731df76a6d3",
-    measurementId: "G-0WMK2HGS4Z"
-  };
-  // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+import firebase from './firebase_init'
 var db = firebase.firestore();
 
 
-function addDay(username) {
+export function addDay(username) {
     
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
@@ -47,7 +25,7 @@ function addDay(username) {
 });
 }
 
-function updateDay(username,nutrition) {
+export function updateDay(username,nutrition) {
     var today = new Date();
         var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).
@@ -82,7 +60,7 @@ function updateDay(username,nutrition) {
 });
 }
     
-function addEntry(username,nutrition) {
+export function addEntry(username,nutrition) {
         var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).collection("dates").doc(date);
@@ -99,7 +77,7 @@ function addEntry(username,nutrition) {
     })
 }
 
-function getPresentDay (username) {
+export function getPresentDay (username) {
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).
@@ -118,7 +96,7 @@ function getPresentDay (username) {
     });
 }
 
-function addMeal (username,mealname,mealingredients) {
+export function addMeal (username,mealname,mealingredients) {
         var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var record_name = mealname+'-'+date;
@@ -132,3 +110,7 @@ function addMeal (username,mealname,mealingredients) {
     })
 }
 
+export function testHi(){
+    let ret = "testHI"
+    return ret
+}
