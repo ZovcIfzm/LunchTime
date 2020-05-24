@@ -1,0 +1,31 @@
+import "firebase_functions.js" to get access to these:
+
+addEntry(username, nutrition)
+	username should be a string, for now, there is no code to create new users, so just use "<TEST>" as the username every time
+	
+	nutrition should be an object of the following form:
+	{
+        calories: 0,
+        fiber: 0,
+        iron: 0,
+        protein: 0,
+        saturated_fat:0,
+        unsaturated_fat:0,
+        vitaminA:0,
+        vitaminB:0,
+        vitaminC:0   
+}
+	(of course the numbers don't have to be zero).
+	The function will check if the user has any records for the present day,
+	 if so it will add the new nutrition data to the existing data. If not, 
+	it will add a new entry for the current day with the data.
+
+
+getPresentDay(username)
+	username same as before, use "<TEST>"
+	ONLY CALL THIS IF YOU KNOW THERE IS DATA FOR THE PRESENT DAY
+	to be sure there is data, you can just call addEntry with zeros
+	in the object (if the entry doesn't exist it will fill it with 0
+	if it does, it will add 0 having no effect). 
+	The function returns an object of the form above with the correct
+	values for the entered user on the present day
