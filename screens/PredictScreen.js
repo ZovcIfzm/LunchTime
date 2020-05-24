@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView, ImageBackground, View, Text, Alert, Image} from
 import {connect} from 'react-redux';
 import ImageManipulator from 'expo';
 //import { NavigationActions } from 'react-navigation'
-import { CLARIFAI_KEY } from 'react-native-dotenv'
+import { CLARIFAI_KEY, WOLFRAM_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
 import {NavigationEvents} from 'react-navigation'
 import * as fbfunc from '../firebase_functions'  

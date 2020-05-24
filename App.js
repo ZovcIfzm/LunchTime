@@ -21,14 +21,14 @@ import {Provider} from 'react-redux';
 const initialState = {
   counter : 0,
   calorie_count : 1600,
-  saturated_fats: 0.9,
-  unsaturated_fats: 0.3,
-  protein: 0.5,
-  fiber: 0.7,
-  iron: 0.5,
-  vitamin_a: 0.4,
-  vitamin_b: 0.2,
-  vitamin_c: 0.9,
+  saturated_fats: "24%",
+  unsaturated_fats: "57%",
+  protein: "12%",
+  fiber: "8%",
+  iron: "5%",
+  vitamin_a: "40%",
+  vitamin_b: "24%",
+  vitamin_c: "27%",
 
 }
 

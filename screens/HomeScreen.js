@@ -23,7 +23,7 @@ class RecipeScreen extends React.Component{
           <Header 
               backgroundColor='#fff'
               leftComponent={{icon: 'menu', color: 'black'}}
-              centerComponent={{ text: 'Nutrition', style: styles.headerText}}
+              centerComponent={{ text: 'Home', style: styles.headerText}}
               //rightComponent={{ text: 'Right component', style: styles.headerText }}
               containerStyle={{
                 elevation: 10,
@@ -46,17 +46,21 @@ class RecipeScreen extends React.Component{
             style={styles.foodRecommendation}
           />
         
+        
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Today's Recommended Meal: \n Grilled Pepper Chicken with Rice"}</Text>
+          </View>
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein + " g"}</Text>
+            <Text style={styles.infoCardText}>{"Today's Protein: " + this.props.protein}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats + " g"}</Text>
+            <Text style={styles.infoCardText}>{"Today's Saturated Fats: " + this.props.saturated_fats}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.unsaturated_fats + " g"}</Text>
+            <Text style={styles.infoCardText}>{"Today's Unsaturated Fats: " + this.props.unsaturated_fats}</Text>
           </View>
         </ScrollView>
       </ImageBackground>
