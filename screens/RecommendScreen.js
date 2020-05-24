@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, ScrollView, StatusBar} from 'react-native';
+import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View, ScrollView, StatusBar} from 'react-native';
 
 import { Header, Card, CardItem, ListItem} from 'react-native-elements'
 import { MonoText } from '../components/StyledText';
@@ -17,7 +17,7 @@ const images = [
 ];
 
 const scrollY = new Animated.Value(0);
-const HEADER_HEIGHT = Platform.OS == 'ios'?115:70+StatusBar.currentHeight;
+const HEADER_HEIGHT = 60;
 const diffClampScrollY = Animated.diffClamp(scrollY, 0, HEADER_HEIGHT);
 const headerY = Animated.interpolate(diffClampScrollY, {
   inputRange:[0, HEADER_HEIGHT],
@@ -27,51 +27,64 @@ class RecommendScreen extends React.Component{
   render(){
     
     return (
-      <View style={{ flex: 1 }}>
-        <Animated.View
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          height: HEADER_HEIGHT,
-          backgroundColor: 'lightblue',
-          zIndex: 1000,
-          elevation: 1000,
-          transform: [{translateY: headerY}],
-          alignItems: 'center',
-          justifyContent: 'center',
-          paddingTop: 45
-        }}>
-          <Text style={{fontSize:25, fontWeight: 'bold', color:'white'}}>Recommends</Text>
-        </Animated.View>
+      <ImageBackground 
+      source={require('../assets/images/kitchentable.jpg')} 
+      style={styles.container}
+      blurRadius={1}>
+          <Animated.View
+          style={{
+
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            height: HEADER_HEIGHT,
+            backgroundColor: 'transparent',
+            zIndex: 1000,
+            elevation: 1000,
+            transform: [{translateY: headerY}],
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+              
+          <ImageBackground 
+          source={require('../assets/images/wood.jpg')} 
+          style={styles.headerBack}
+          blurRadius={1}
+          >
+            <Text style={styles.headerText}>Recommended</Text>
+          </ImageBackground>
+          </Animated.View>
         <Animated.ScrollView
           bounces={false}
           scrollEventThrottle={16}
-          style={{paddingTop: HEADER_HEIGHT}}
           onScroll={Animated.event([
             {
               nativeEvent:{contentOffset:{y: scrollY}}
             }
           ])}
         >
-          {images.map(image => (
-            <View key={image.id} style={{
-              height: 400, 
-              margin: 0,
-              elevation: 5,
-              shadowOffset:{  width: 10,  height: 10,  },
-              shadowColor: 'black',
-              shadowOpacity: 0.1,
-              }}>
-              <Image
-                source= {image.uri}
-                style={{flex: 1, height: null, width: null, borderRadius: 10}}
-              />
+          <View style={{paddingTop: 60}}></View>
+            <View>
+            {images.map(image => (
+              <View key={image.id} style={{
+                height: 200, 
+                margin: 5,
+                borderRadius: 20,
+                elevation: 5,
+                shadowOffset:{  width: 10,  height: 10,  },
+                shadowColor: 'black',
+                shadowOpacity: 0.1,
+                }}>
+                <Image
+                  source= {image.uri}
+                  style={{flex: 1, height: null, width: null, borderRadius: 10}}
+                />
+              </View>
+            ))}
             </View>
-          ))}
         </Animated.ScrollView>
-        </View>
+      </ImageBackground>
     );
   }
 }
@@ -109,6 +122,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'whitesmoke',
+  },
+  
+  headerBack:{ 
+    height: 60,
+    width: '100%',
+    paddingTop: 18,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -194,7 +213,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 25,
-    color: 'black'
+    color: 'whitesmoke',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   infoCard: {
     backgroundColor: '#fff',

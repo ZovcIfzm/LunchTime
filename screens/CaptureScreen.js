@@ -46,10 +46,10 @@ class CaptureScreen extends React.Component {
         </ImageBackground>
         <View style={{ flex: 1}}>
 
-        <ImageBackground 
+        <Image 
           source={require('../assets/images/takingpicofmeal.jpg')}
           style={styles.pictureTaking}>
-        </ImageBackground>
+        </Image>
 
           <TouchableOpacity onPress={this._pickImage} style={styles.infoCard}>
             <Text style={styles.infoCardText}>Pick an image from camera roll</Text>
@@ -159,7 +159,6 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    overflow: 'scroll',
   },
   headerBack:{ 
     height: 60,
@@ -179,14 +178,15 @@ const styles = StyleSheet.create({
   },
   pictureTaking:{
     alignSelf: 'center',
-    resizeMode: 'center',
-    width: 440,
+    width: 390,
     height: 200,
-    marginBottom: 5,
+    borderRadius: 10,
+    marginHorizontal: 2,
+    marginBottom: 2,
   },
   headerText: {
-    fontSize: 22,
-    color: 'black',
+    fontSize: 25,
+    color: 'whitesmoke',
     fontWeight: 'bold',
   },
   button: {

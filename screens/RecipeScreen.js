@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Header, Card, CardItem, ListItem} from 'react-native-elements'
@@ -11,28 +11,41 @@ import {connect} from 'react-redux';
 class RecipeScreen extends React.Component{
   render(){
     return (
-      <View style={styles.container}>
-        <Header 
-            backgroundColor='#fff'
-            centerComponent={{ text: 'Honey Chicken', style: styles.headerText}}
-            //rightComponent={{ text: 'Right component', style: styles.headerText }}
-            containerStyle={{
-              elevation: 10,
-              shadowOffset:{  width: 10,  height: 10,  },
-              shadowColor: 'black',
-              shadowOpacity: 1.0,
-            }}
-            >
-        </Header>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.imageContainer}>
-            <Image 
-              source={
-                  require('../assets/images/honeyChicken.png')
-              }
-              style={styles.foodRecommendation}
-            />
-          </View>
+      <ImageBackground 
+      source={require('../assets/images/kitchentable.jpg')} 
+      style={styles.container}
+      blurRadius={1}>
+        <ImageBackground 
+        source={require('../assets/images/wood.jpg')} 
+        style={styles.headerBack}
+        blurRadius={1}
+        >
+          <Header 
+              backgroundColor='#fff'
+              leftComponent={{icon: 'menu', color: 'black'}}
+              centerComponent={{ text: 'Recipe', style: styles.headerText}}
+              //rightComponent={{ text: 'Right component', style: styles.headerText }}
+              containerStyle={{
+                elevation: 10,
+                shadowOffset:{  width: 10,  height: 10,  },
+                shadowColor: 'black',
+                shadowOpacity: 1.0,
+                backgroundColor: 'transparent',
+                paddingBottom: 20,
+                height: 60,
+              }}
+              >
+          </Header>
+        </ImageBackground>
+        <ScrollView style={styles.container}>
+      
+          <Image 
+            source={
+                require('../assets/images/honeyChicken.png')
+            }
+            style={styles.foodRecommendation}
+          />
+        
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
@@ -46,7 +59,7 @@ class RecipeScreen extends React.Component{
             <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.calorie_count}</Text>
           </View>
         </ScrollView>
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -83,7 +96,6 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'whitesmoke',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -91,9 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -169,37 +178,47 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 25,
-    color: 'black'
+    color: 'whitesmoke',
+    fontWeight: 'bold',
   },
   infoCard: {
     backgroundColor: '#fff',
-    marginHorizontal: 17,
-    marginBottom: 10,
-    padding: 15,
-    borderRadius: 10,
+    marginHorizontal: 5,
+    margin: 5,
+    padding: 12,
+    borderRadius: 5,
     elevation: 5,
     shadowOffset:{  width: 10,  height: 10,  },
     shadowColor: 'black',
     shadowOpacity: 0.1,
+    opacity: 0.75,
   },
   infoCardText: {
+    textAlign: 'center',
     fontSize: 18,
   },
   imageContainer: {
-    height: 400, 
-    margin: 0,
-    elevation: 5,
-    shadowOffset:{  width: 10,  height: 10,  },
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
+    backgroundColor: '#fff',
+    padding: 5,
+    borderRadius: 20,
+    marginHorizontal: 63,
+    margin: 5,
   },
   foodRecommendation: {
-    flex: 1, height: null, width: null, borderRadius: 10
+    alignSelf: 'center',
+    width: 350,
+    height: 300,
+    borderRadius: 20,
+    margin: 10,
   },
   title: {
     alignSelf: 'center',
     fontSize: 25,
-  }
+  },
+  
+  headerBack:{ 
+    height: 60,
+  },
 });
 
 

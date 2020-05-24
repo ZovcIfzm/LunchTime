@@ -101,9 +101,12 @@ function mapDispatchToProps(dispatch){
 //Color scheme: -- not this one -- https://coolors.co/ef6351-f38375-f7a399-fbc3bc-ffe3e0
 //https://coolors.co/6d949b-fff7b5-eabc5a-bf6763-8e5756
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    backgroundColor: 'whitesmoke',
+    overflow: 'scroll',
+  },
+  headerBack:{ 
+    height: 60,
   },
   developmentModeText: {
     marginBottom: 20,
