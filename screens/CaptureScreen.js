@@ -19,7 +19,7 @@ class CaptureScreen extends React.Component {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button title="Pick an image from camera roll" onPress={this._pickImage} />
         <Button title="Take photo" onPress={this._takePhoto}/>
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
         {
           image ? <Button title="Submit photo" onPress={this._submitPhoto}/> :<></>          
         } 
@@ -52,12 +52,11 @@ class CaptureScreen extends React.Component {
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
+        base64: true,
       });
       if (!result.cancelled) {
-        this.setState({ image: result.uri });
+        this.setState({ image: result.base64 });
       }
-
-      console.log(result);
     } catch (E) {
       console.log(E);
     }
@@ -70,9 +69,10 @@ class CaptureScreen extends React.Component {
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
+        base64: true,
       });
       if (!result.cancelled) {
-        this.setState({ image: result.uri });
+        this.setState({ image: result.base64 });
       }
     } catch (E) {
       console.log(E);
@@ -80,6 +80,7 @@ class CaptureScreen extends React.Component {
   };
 
   _submitPhoto = () => {
+    //console.log(this.state.image)
     this.props.navigation.navigate('Predict', {image: this.state.image})
   }
 }
