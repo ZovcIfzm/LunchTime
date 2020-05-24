@@ -87,6 +87,23 @@ function updateDay(username,nutrition) {
     console.log("Error getting document:", error);
 });
 }
+    
+function addEntry(username,nutrition) {
+        var today = new Date();
+    var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
+    var docRef = db.collection("users").doc(username).collection("dates").doc(date);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("just updating an existing entry");
+            updateDay(username,nutrition);
+        }
+        else {
+            addDay(username);
+            console.log("made a new entry and udpated it!");
+            updateDay(username,nutrition);
+        }
+    })
+}
 
 function getPresentDay (username) {
     var today = new Date();
@@ -119,7 +136,7 @@ var newdata = {
         vitaminB:10,
         vitaminC:10   
 }
-addDay('<TEST>');
+addEntry('<TEST>',newdata);
 
 
 
