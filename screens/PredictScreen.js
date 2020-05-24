@@ -10,10 +10,52 @@ import Clarifai from 'clarifai'
   
 class PredictScreen extends React.Component {
 
+
+  componentDidMount() {
+    const clarifai = new Clarifai.App({
+      apiKey: CLARIFAY_KEY
+    })
+
+    //Clarifai library uses nextTick method which is not supported in React Native
+    //Thus setImmediete is required
+    //Tutorial says best place to set this polyfill is App.js, but we're not using a polyfill?
+    //setImmediete means run this once the end of this javascript executable block is reached.
+    process.nextTick = setImmediate // RN polyfill
+
+    const { data } = this.props.navigation.state.params.image
+    const file = { base64: data }
+    
+    clarifai.models.predict(Clarifai.GENERAL_MODEL, file)
+      .then(response => {
+        const { concepts } = response.outputs[0].data
+
+        if (concepts && concepts.length > 0) {
+          for (const prediction of concepts) {
+            if (prediction.name === 'pizza' && prediction.value >= 0.99) {
+              return this.setState({ loading: false, result: 'Pizza' })
+            }
+            this.setState({ result: 'Not Pizza' })
+          }
+        }
+
+        this.setState({ loading: false })
+      })
+      .catch(e => {
+        Alert.alert(
+          'Une erreur est survenue',
+          'Désolé, le quota est peut-être dépassé, réessaye plus tard !',
+          [
+            { text: 'OK', onPress: () => this._cancel() },
+          ],
+          { cancelable: false }
+        )
+      })
+  }
+
   render() {
 
     return (
-      <View></View>
+      <Text>This is the predictScreen</Text>
     )
   }
 }

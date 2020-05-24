@@ -20,6 +20,9 @@ class CaptureScreen extends React.Component {
         <Button title="Pick an image from camera roll" onPress={this._pickImage} />
         <Button title="Take photo" onPress={this._takePhoto}/>
         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        {
+          image ? <Button title="Submit photo" onPress={this._submitPhoto}/> :<></>          
+        } 
       </View>
     );
   }
@@ -77,6 +80,10 @@ class CaptureScreen extends React.Component {
       console.log(E);
     }
   };
+
+  _submitPhoto = () => {
+    this.props.navigation.navigate('Predict')
+  }
 }
 
 
