@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Header, Card, CardItem, ListItem} from 'react-native-elements'
@@ -23,7 +23,7 @@ class RecipeScreen extends React.Component{
           <Header 
               backgroundColor='#fff'
               leftComponent={{icon: 'menu', color: 'black'}}
-              centerComponent={{ text: 'Nutrition', style: styles.headerText}}
+              centerComponent={{ text: 'Recipe', style: styles.headerText}}
               //rightComponent={{ text: 'Right component', style: styles.headerText }}
               containerStyle={{
                 elevation: 10,
@@ -46,18 +46,21 @@ class RecipeScreen extends React.Component{
             style={styles.foodRecommendation}
           />
         
-          <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
-          </View>
-          <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein + " g"}</Text>
-          </View>
-          <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats + " g"}</Text>
-          </View>
-          <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.unsaturated_fats + " g"}</Text>
-          </View>
+        <View style={styles.infoCard} >
+        <FlatList
+          data={[
+            {key: '6 chicken thighs'},
+            {key: 'Salt and pepper, to season'},
+            {key: '2 teaspoons garlic powder, to season'},
+            {key: '6 cloves garlic, crushed'},
+            {key: '1/3 cup honey'},
+            {key: '1/4 cup water (or chicken broth)'},
+            {key: '2 tablespoons rice wine vinegar'},
+            {key: '1 tablespoon soy sauce'},
+          ]}
+          renderItem={({item}) => <Text style={styles.infoCardText}>{item.key}</Text>}
+        />
+      </View>
         </ScrollView>
       </ImageBackground>
     );

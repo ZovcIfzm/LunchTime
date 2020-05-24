@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Header, Card, CardItem, ListItem} from 'react-native-elements'
@@ -8,70 +8,63 @@ import { MonoText } from '../components/StyledText';
 
 import {connect} from 'react-redux';
 
-class HomeScreen extends React.Component{
+class RecipeScreen extends React.Component{
   render(){
     return (
-      <View style={styles.container}>
-        <Header 
-            backgroundColor='#fff'
-            leftComponent={{icon: 'menu', color: 'black'}}
-            centerComponent={{ text: 'Home', style: styles.headerText}}
-            //rightComponent={{ text: 'Right component', style: styles.headerText }}
-            containerStyle={{
-              elevation: 10,
-              shadowOffset:{  width: 10,  height: 10,  },
-              shadowColor: 'black',
-              shadowOpacity: 1.0,
-            }}
-            >
-        </Header>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.title}>{"Recipe of The Day"}</Text>
-          <View style={styles.imageContainer}>
-            <Image 
-              source={
-                  require('../assets/images/spaghettiandmeatballs.jpg')
-              }
-              style={styles.foodRecommendation}
-            />
-          </View>
+      <ImageBackground 
+      source={require('../assets/images/kitchentable.jpg')} 
+      style={styles.container}
+      blurRadius={1}>
+        <ImageBackground 
+        source={require('../assets/images/wood.jpg')} 
+        style={styles.headerBack}
+        blurRadius={1}
+        >
+          <Header 
+              backgroundColor='#fff'
+              leftComponent={{icon: 'menu', color: 'black'}}
+              centerComponent={{ text: 'Nutrition', style: styles.headerText}}
+              //rightComponent={{ text: 'Right component', style: styles.headerText }}
+              containerStyle={{
+                elevation: 10,
+                shadowOffset:{  width: 10,  height: 10,  },
+                shadowColor: 'black',
+                shadowOpacity: 1.0,
+                backgroundColor: 'transparent',
+                paddingBottom: 20,
+                height: 60,
+              }}
+              >
+          </Header>
+        </ImageBackground>
+        <ScrollView style={styles.container}>
+      
+          <Image 
+            source={
+                require('../assets/images/honeyChicken.png')
+            }
+            style={styles.foodRecommendation}
+          />
+        
           <View style={styles.infoCard} >
             <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein}</Text>
+            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein + " g"}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats}</Text>
+            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats + " g"}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.calorie_count}</Text>
+            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.unsaturated_fats + " g"}</Text>
           </View>
-
-          <TouchableOpacity onPress={() => this.props.increaseCounter()}>
-            <Text style={styles.getStartedText}>
-              CountUp
-            </Text>
-          </TouchableOpacity>
-          
-          <Text style={styles.getStartedText}>{this.props.counter}</Text>
-
-
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-          </View>
-        </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
 
-HomeScreen.navigationOptions = {
+RecipeScreen.navigationOptions = {
   header: null,
 };
 
@@ -101,12 +94,8 @@ function mapDispatchToProps(dispatch){
 //Color scheme: -- not this one -- https://coolors.co/ef6351-f38375-f7a399-fbc3bc-ffe3e0
 //https://coolors.co/6d949b-fff7b5-eabc5a-bf6763-8e5756
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
-    overflow: 'scroll',
-  },
-  headerBack:{ 
-    height: 60,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -114,9 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -192,39 +178,48 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 25,
-    color: 'black'
+    color: 'whitesmoke',
+    fontWeight: 'bold',
   },
   infoCard: {
     backgroundColor: '#fff',
-    marginHorizontal: 17,
-    marginBottom: 10,
-    padding: 15,
-    borderRadius: 10,
+    marginHorizontal: 5,
+    margin: 5,
+    padding: 12,
+    borderRadius: 5,
     elevation: 5,
     shadowOffset:{  width: 10,  height: 10,  },
     shadowColor: 'black',
     shadowOpacity: 0.1,
+    opacity: 0.75,
   },
   infoCardText: {
+    textAlign: 'center',
     fontSize: 18,
   },
   imageContainer: {
     backgroundColor: '#fff',
-    padding: 0,
+    padding: 5,
     borderRadius: 20,
     marginHorizontal: 63,
-    marginBottom: 20,
+    margin: 5,
   },
   foodRecommendation: {
     alignSelf: 'center',
-    width: 250,
+    width: 350,
+    height: 300,
     borderRadius: 20,
+    margin: 10,
   },
   title: {
     alignSelf: 'center',
     fontSize: 25,
-  }
+  },
+  
+  headerBack:{ 
+    height: 60,
+  },
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeScreen);
