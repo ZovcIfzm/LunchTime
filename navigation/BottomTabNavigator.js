@@ -51,10 +51,10 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Predict"
+        name="Analyze"
         component={PredictScreen}
         options={{
-          title: 'Predict',
+          title: 'Analyze',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />

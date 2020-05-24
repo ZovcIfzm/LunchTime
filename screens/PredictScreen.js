@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ActivityIndicator, View, Text, StatusBar, Alert, Button, Image} from 'react-native'
+import { StyleSheet, ScrollView, ImageBackground, View, Text, Alert, Image} from 'react-native'
 import {connect} from 'react-redux';
 import ImageManipulator from 'expo';
 //import { NavigationActions } from 'react-navigation'
@@ -8,12 +8,14 @@ import { CLARIFAI_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
 import {NavigationEvents} from 'react-navigation'
 import * as fbfunc from '../firebase_functions'  
+import {Header} from 'react-native-elements'
 
 class PredictScreen extends React.Component {
   state={
     picture: null,
     loading: false,
     topFiveIngredients: [],
+    calorie_count: 760,
   }
 
   resize = async photo => {
@@ -35,8 +37,13 @@ class PredictScreen extends React.Component {
     //Tutorial says best place to set this polyfill is App.js, but we're not using a polyfill?
     //setImmediete means run this once the end of this javascript executable block is reached.
     process.nextTick = setImmediate // RN polyfill
-
-    const data = this.props.route.params.image
+    const data = null
+    try{
+      data = this.props.route.params.image
+    }
+    catch{
+      console.log("error in retrieving image from nav")
+    }
     this.setState({picture: data})
     //const otherParam=navigation.getParam('otherParam','some default value');
     const file = { base64: data }
@@ -52,6 +59,8 @@ class PredictScreen extends React.Component {
         console.log(concepts[0].name)
         console.log(concepts[1].name)
         console.log(concepts[2].name)
+        console.log(concepts[3].name)
+        
         console.log(fbfunc.testHi())
         fbfunc.addMeal("<TEST>", "meal", this.state.topFiveIngredients)
         
@@ -72,8 +81,7 @@ class PredictScreen extends React.Component {
       .catch(e => {
         console.log(e)
         Alert.alert(
-          'An error has occurred',
-            'Sorry, the quota may be exceeded, try again later!',
+          'Please submit a photo first',
           [
             { text: 'OK'},
           ],
@@ -87,25 +95,117 @@ class PredictScreen extends React.Component {
     <NavigationEvents onDidFocus={() => console.log('I am triggered')} />
 
     return (
-      <View>
-        <Text>This is the predictScreen</Text>
-        {this.state.picture && <Image source={{ uri: `data:${"image"};base64,${this.state.picture}` }} style={{ width: 200, height: 200 }} />}
-      </View>
+      <ImageBackground 
+      source={require('../assets/images/kitchentable.jpg')} 
+      style={styles.container}
+      blurRadius={1}>
+        <ImageBackground 
+        source={require('../assets/images/wood.jpg')} 
+        style={styles.headerBack}
+        blurRadius={1}
+        >
+          <Header 
+              backgroundColor='#fff'
+              leftComponent={{icon: 'menu', color: 'black'}}
+              centerComponent={{ text: 'Analyze', style: styles.headerText}}
+              //rightComponent={{ text: 'Right component', style: styles.headerText }}
+              containerStyle={{
+                elevation: 10,
+                shadowOffset:{  width: 10,  height: 10,  },
+                shadowColor: 'black',
+                shadowOpacity: 1.0,
+                backgroundColor: 'transparent',
+                paddingBottom: 20,
+                height: 60,
+              }}
+              >
+          </Header>
+        </ImageBackground>
+        <ScrollView style={styles.container}>
+      
+        <Image source={{ uri: `data:${"image"};base64,${this.state.picture}` }} style={styles.foodRecommendation} />
+        
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Largest food component: " + this.state.topFiveIngredients[0]}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Second largest food component: " + this.state.topFiveIngredients[1]}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Third largest food component: " + this.state.topFiveIngredients[2]}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Calorie estimate: " + this.state.calorie_count}</Text>
+          </View>
+        </ScrollView>
+      </ImageBackground>
     )
   }
 }
 
 function mapStateToProps(state){
-return{
-  counter:state.counter
-}
+  return{
+    counter:state.counter
+  }
 }
 
-function mapDispatchToProps(dispatch){
-return{
-  increaseCounter: () => dispatch({type:'INCREASE_COUNTER'}),
-  decreaseCounter: () => dispatch({type: 'DECREASE_COUNTER'}),
+  function mapDispatchToProps(dispatch){
+  return{
+    increaseCounter: () => dispatch({type:'INCREASE_COUNTER'}),
+    decreaseCounter: () => dispatch({type: 'DECREASE_COUNTER'}),
+  }
 }
-}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  navigationFilename: {
+    marginTop: 5,
+  },
+  headerText: {
+    fontSize: 25,
+    color: 'whitesmoke',
+    fontWeight: 'bold',
+  },
+  infoCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 5,
+    margin: 5,
+    padding: 12,
+    borderRadius: 5,
+    elevation: 5,
+    shadowOffset:{  width: 10,  height: 10,  },
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
+    opacity: 0.75,
+  },
+  infoCardText: {
+    textAlign: 'center',
+    fontSize: 18,
+  },
+  imageContainer: {
+    backgroundColor: '#fff',
+    padding: 5,
+    borderRadius: 20,
+    marginHorizontal: 63,
+    margin: 5,
+  },
+  foodRecommendation: {
+    alignSelf: 'center',
+    width: 350,
+    height: 300,
+    borderRadius: 20,
+    margin: 10,
+  },
+  title: {
+    alignSelf: 'center',
+    fontSize: 25,
+  },
+  
+  headerBack:{ 
+    height: 60,
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PredictScreen);
