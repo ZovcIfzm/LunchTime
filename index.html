@@ -95,7 +95,8 @@ function getPresentDay (username) {
     collection("dates").doc(date);
     docRef.get().then(function(doc) {
         if (!doc.exists) {
-            console.log('DNE');
+            console.log('user data does not exist, please create it');
+            return;
         }
         else {
         console.log(doc.data());
@@ -106,7 +107,22 @@ function getPresentDay (username) {
     });
 }
 
-var x = getPresentDay('<TEST>');
+
+var newdata = {
+        calories: 10,
+        fiber: 10,
+        iron: 10,
+        protein: 10,
+        saturated_fat:10,
+        unsaturated_fat:10,
+        vitaminA:10,
+        vitaminB:10,
+        vitaminC:10   
+}
+addDay('<TEST>');
+
+
+
     
 </script>
 </body>
