@@ -40,13 +40,7 @@ class PredictScreen extends React.Component {
     //Tutorial says best place to set this polyfill is App.js, but we're not using a polyfill?
     //setImmediete means run this once the end of this javascript executable block is reached.
     process.nextTick = setImmediate // RN polyfill
-    const data = null
-    try{
-      data = this.props.route.params.image
-    }
-    catch{
-      console.log("error in retrieving image from nav")
-    }
+    const data = this.props.route.params.image
     this.setState({picture: data})
     //const otherParam=navigation.getParam('otherParam','some default value');
     const file = { base64: data }
@@ -67,6 +61,11 @@ class PredictScreen extends React.Component {
         console.log(fbfunc.testHi())
         fbfunc.addMeal("<TEST>", "meal", this.state.topFiveIngredients)
         
+        //Wolfram
+        //getNutritionalInfo("http://api.wolframalpha.com/v2/query?input='+tag+'%20nutrition%20facts&appid='"+WOLFRAM_KEY, function (result) {
+        //  $('#concepts').html('<h3>'+ tag + '</h3>' + "<img src='"+result+"'>");
+        //});
+
         if (concepts && concepts.length > 0) {
           for (const prediction of concepts) {
             if (prediction.name === 'pizza' && prediction.value >= 0.99) {

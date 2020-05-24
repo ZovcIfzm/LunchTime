@@ -138,7 +138,7 @@ class CaptureScreen extends React.Component {
 
   _submitPhoto = () => {
     //console.log(this.state.image)
-    this.props.navigation.navigate('Predict', {image: this.state.image})
+    this.props.navigation.navigate('Analyze', {image: this.state.image})
   }
 }
 
