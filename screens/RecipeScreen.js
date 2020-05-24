@@ -23,7 +23,7 @@ class RecipeScreen extends React.Component{
           <Header 
               backgroundColor='#fff'
               leftComponent={{icon: 'menu', color: 'black'}}
-              centerComponent={{ text: 'Recipe', style: styles.headerText}}
+              centerComponent={{ text: 'Nutrition', style: styles.headerText}}
               //rightComponent={{ text: 'Right component', style: styles.headerText }}
               containerStyle={{
                 elevation: 10,
@@ -50,13 +50,13 @@ class RecipeScreen extends React.Component{
             <Text style={styles.infoCardText}>{"Today's Calories: " + this.props.calorie_count}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein}</Text>
+            <Text style={styles.infoCardText}>{"Protein: " + this.props.protein + " g"}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats}</Text>
+            <Text style={styles.infoCardText}>{"Saturated Fats: " + this.props.saturated_fats + " g"}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.calorie_count}</Text>
+            <Text style={styles.infoCardText}>{"Unsaturated Fats: " + this.props.unsaturated_fats + " g"}</Text>
           </View>
         </ScrollView>
       </ImageBackground>
