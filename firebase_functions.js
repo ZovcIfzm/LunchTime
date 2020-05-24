@@ -22,7 +22,7 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 
-function addDay(username) {
+export function addDay(username) {
     
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
@@ -45,7 +45,7 @@ function addDay(username) {
 });
 }
 
-function updateDay(username,nutrition) {
+export function updateDay(username,nutrition) {
     var today = new Date();
         var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).
@@ -80,7 +80,7 @@ function updateDay(username,nutrition) {
 });
 }
     
-function addEntry(username,nutrition) {
+export function addEntry(username,nutrition) {
         var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).collection("dates").doc(date);
@@ -97,7 +97,7 @@ function addEntry(username,nutrition) {
     })
 }
 
-function getPresentDay (username) {
+export function getPresentDay (username) {
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var docRef = db.collection("users").doc(username).
@@ -116,7 +116,7 @@ function getPresentDay (username) {
     });
 }
 
-function addMeal (username,mealname,mealingredients) {
+export function addMeal (username,mealname,mealingredients) {
         var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
     var record_name = mealname+'-'+date;
