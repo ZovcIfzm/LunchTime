@@ -29,3 +29,10 @@ getPresentDay(username)
 	if it does, it will add 0 having no effect). 
 	The function returns an object of the form above with the correct
 	values for the entered user on the present day
+    
+addMeal(username,mealname,mealingredients)
+    username should be "<TEST>" as always
+    mealname is just a string describing the meal
+    mealingredients is a list of strings (each ingredient)
+    
+    this just saves a meal in the databse for a given user

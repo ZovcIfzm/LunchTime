@@ -123,6 +123,20 @@ function getPresentDay (username) {
         return error;
     });
 }
+    
+function addMeal (username,mealname,mealingredients) {
+        var today = new Date();
+    var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
+    var record_name = mealname+'-'+date;
+    var ingredient_string = mealingredients.join();
+    db.collection("users").doc(username).collection("meals").doc(record_name).set(
+    {ingredients:ingredient_string}
+    ).then(function() {
+        console.log('updated database with meal: ' + mealname);
+    }).catch(function(error) {
+        console.log("Error when trying to add a meal: "+error);
+    })
+}
 
 
 var newdata = {
@@ -136,7 +150,9 @@ var newdata = {
         vitaminB:10,
         vitaminC:10   
 }
-addEntry('<TEST>',newdata);
+var mealname = "tofu";
+var ing = ["tofu","soy sauce","salt"];
+addMeal("<TEST>",mealname,ing);
 
 
 
