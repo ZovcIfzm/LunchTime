@@ -16,6 +16,9 @@ class PredictScreen extends React.Component {
     loading: false,
     topFiveIngredients: [],
     calorie_count: 760,
+    sat_fats: '64%',
+    unsat_fats: '76%',
+    protein: '21%'
   }
 
   resize = async photo => {
@@ -135,7 +138,16 @@ class PredictScreen extends React.Component {
             <Text style={styles.infoCardText}>{"Third largest food component: " + this.state.topFiveIngredients[2]}</Text>
           </View>
           <View style={styles.infoCard} >
-            <Text style={styles.infoCardText}>{"Calorie estimate: " + this.state.calorie_count}</Text>
+            <Text style={styles.infoCardText}>{"Calories: " + this.state.calorie_count}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Protein: " + this.state.protein}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Saturated fats: " + this.state.sat_fats}</Text>
+          </View>
+          <View style={styles.infoCard} >
+            <Text style={styles.infoCardText}>{"Unsaturated fats: " + this.state.unsat_fats}</Text>
           </View>
         </ScrollView>
       </ImageBackground>
