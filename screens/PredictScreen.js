@@ -52,14 +52,14 @@ class PredictScreen extends React.Component {
         console.log(concepts[0].name)
         console.log(concepts[1].name)
         console.log(concepts[2].name)
-        fbfunc.getPresentDay("<TEST>")
+        console.log(fbfunc.testHi())
         fbfunc.addMeal("<TEST>", "meal", this.state.topFiveIngredients)
         
         if (concepts && concepts.length > 0) {
           for (const prediction of concepts) {
             if (prediction.name === 'pizza' && prediction.value >= 0.99) {
               console.log("reached inner result")
-              console.log(this.state.result)
+              console.log("Pizza")
               return this.setState({ loading: false, result: 'Pizza' })
             }
             this.setState({ result: 'Not Pizza' })
