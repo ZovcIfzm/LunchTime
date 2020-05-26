@@ -29,3 +29,6 @@ With our trove of dietary data, there are many ways we could expand LunchTime's 
 React-Native, Redux, Clarifai API, WolframAlpha API, Python, Firebase, Firestore, Gensim, Tasty
 
 Our API: lunchtime-929c6.firebaseapp.com
+
+# Preview
+<img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/homescreen.jpg" width="300"> <img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/capturescreen.jpg" width="300"> <img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/camerascreen.jpg" width="300"> <img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/analyzescreen.jpg" width="300"> <img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/recscreen.jpg" width="300"> <img src="https://github.com/ZovcIfzm/LunchTime/blob/master/readme-imgs/recipescreen.jpg" width="300">
