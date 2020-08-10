@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   foodRecommendation: {
     alignSelf: 'center',
     width: 250,
-    height: 200,
+    height: 150,
     borderRadius: 20,
   },
   pictureTaking:{
