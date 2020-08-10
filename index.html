@@ -163,21 +163,27 @@ function requestClarifai() {
 
 
 var newdata = {
-        calories: 10,
+        calories: 1000,
         fiber: 10,
-        iron: 10,
+        iron: 0,
         protein: 10,
-        saturated_fat:10,
+        saturated_fat:5,
         unsaturated_fat:10,
-        vitaminA:10,
-        vitaminB:10,
-        vitaminC:10   
+        vitaminA:0,
+        vitaminB:0,
+        vitaminC:0   
 }
-var mealname = "tofu";
-var ing = ["tofu","soy sauce","salt"];
+var mealname1 = "sushi";
+var ing1 = ["fish sauce","yellowtail","tuna","rice"];
+var mealname2 = "tofu";
+var ing2 = ["tofu","soy sauce","wasabi","miso"];
+var mealname3 = "stirfry";
+var ing3 = ["cabbage","mirin","pork belly","rice vinegar","noodle","udon"];
 
-    addEntry('<TEST>',newdata);
-
+addEntry('Jane',newdata);
+addMeal('Jane',mealname1,ing1);
+    addMeal('Jane',mealname2,ing2);
+    addMeal('Jane',mealname3,ing3);
 
     
 </script>

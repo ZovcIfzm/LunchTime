@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Lunchtime: Meal Recommender System</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+    <script src="send-request.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Lunchtime Meal Recommender System</a>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Try out our recommendation API by entering your username here (We don't have very many users, so you might want to try "Bob" or "Jane")</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="uid" class="form-control form-control-lg" placeholder="Enter your username...", id="the-only-submission">
+              </div>
+              <div class="col-12 col-md-3">
+                <button class="btn btn-block btn-lg btn-primary" onclick="sendRequest()">Submit</button>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center" id="results">
+      <div class="container mb-5"><h1>Results</h1></div>
+      <p>This is where you will see your recommended meal after you submit a user ID above.
+          Just wait a moment for the request to process and a link to the recipe should appear below.</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-screen-desktop m-auto text-primary"></i>
+            </div>
+            <h3>Recipe Link</h3>
+            <a class="lead mb-0" id="recipe-link">Nothing here yet! Wait a second for your results to come in.</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-check m-auto text-primary"></i>
+            </div>
+            <h3>Servings to Make</h3>
+            <p class="lead mb-0" id="multiplier">Nothing here yet! Wait a second for your results to come in.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/bg-showcase-1.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Health-Based, Personalized Recommendations</h2>
+          <p class="lead mb-0">Our API takes into account both the user's tastes and health needs when making recommendations. All suggested recipes are carefully picked to help our users consume the right amounts of fat, protein, and fiber based on their previous food intake on the same day.</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/bg-showcase-2.jpg');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2>Powered by Machine Learning</h2>
+          <p class="lead mb-0">On the backend, our recommendation system uses a word vector clustering algorithm to predict which ingredients the user will like based on their past meals. After taking nutritional values into account, we recommend a recipe with ingredients the algorithm predicts the user will enjoy.</p>
+        </div>
+      </div>
+ 
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Lunchtime 2020. All Rights Reserved.</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
